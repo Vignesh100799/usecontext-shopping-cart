@@ -26,7 +26,7 @@ const Popular = () => {
                   src={item.image}
                   width={200}
                   height={200}
-                  alt="image"
+                  alt=''
                 />
                 {/* Product details*/}
                 <div className="card-body p-4">
