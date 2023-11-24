@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { createContext, useState } from "react";
-import Spinner from "./Spinner";
 
 const Usercontext = createContext();
 

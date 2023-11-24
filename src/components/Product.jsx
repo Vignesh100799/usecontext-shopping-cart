@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { StarFill } from "react-bootstrap-icons";
 import { useContext } from "react";
@@ -8,10 +8,10 @@ const Product = () => {
   const { product, handleAdditem, handleRemoveitem, cartitem } =
     useContext(Usercontext);
 
-  const isincart = () =>
-    product && cartitem.some((item) => item.id === product.id);
-  const handleclick = () =>
-    isincart() ? handleRemoveitem(product) : handleAdditem(product);
+  // const isincart = () =>
+  //   product && cartitem.some((item) => item.id === product.id);
+  // const handleclick = () =>
+  //   isincart() ? handleRemoveitem(product) : handleAdditem(product);
 
   return (
     <>
@@ -19,13 +19,13 @@ const Product = () => {
         return (
           <div key={index} className="col mb-5">
             <div className="card h-100">
-              {/* Product image*/}
+             
               <img
-                className="card-img-top"
+                className="card-img-top p-3"
                 src={item.image}
                 width={200}
                 height={200}
-                alt="..."
+                alt='product_image'
               />
               {/* Product details*/}
               <div className="card-body p-4">
@@ -63,8 +63,6 @@ const Product = () => {
                       Add to cart
                     </button>
                   )}
-
-                  {/* <button onClick={()=> handleAdditem(item)} className="btn btn-outline-dark mt-auto">Add to cart</button> */}
                 </div>
               </div>
             </div>

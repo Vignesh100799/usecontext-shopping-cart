@@ -1,7 +1,6 @@
 import React from 'react'
 import { useContext } from 'react';
 import Usercontext from '../context/Usercontext';
-import { TrashFill } from 'react-bootstrap-icons';
 import Cartitem from './Cartitem';
 import { Link } from 'react-router-dom';
 
