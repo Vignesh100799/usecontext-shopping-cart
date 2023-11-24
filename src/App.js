@@ -25,7 +25,6 @@ function App() {
         <BrowserRouter>
           <UserProvider>
             <Navbar/>
-            <Header />
             <Routes>
               <Route path="/" element={<Allproducts />} />
               <Route path="/popular" element={<Popular />} />

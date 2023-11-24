@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 const Cartpage = () => {
-  const {cartitem,handleRemoveitem,total} = useContext(Usercontext)
+  const {cartitem,total} = useContext(Usercontext)
   return (
     <div>
     <section className="h-100 h-custom" style={{backgroundColor: '#d2c9ff'}}>
@@ -28,7 +28,7 @@ const Cartpage = () => {
                 <ol className="list-group list-group-numbered">
             {
               cartitem.map((item,index)=>{
-                 return <Cartitem key={index}/>
+                 return <Cartitem item={item} key={index}/>
                  
               })
             }</ol>
@@ -45,7 +45,7 @@ const Cartpage = () => {
                     <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                     <hr className="my-4" />
                     <div className="d-flex justify-content-between mb-4">
-                      <h5 className="text-uppercase">items {cartitem.length}</h5>
+                      <h5 className="text">ITEMS {cartitem.length} Nos</h5>
                       <h5>&#36;{Math.round(total)}</h5>
                     </div>
                     
@@ -54,7 +54,7 @@ const Cartpage = () => {
                       <h5 className="text-uppercase">Total price</h5>
                       <h5>&#36;{Math.round(total)}</h5>
                     </div>
-                    <button type="button" className="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Register</button>
+                    <button type="button" className="btn btn-success btn-block btn-lg" data-mdb-ripple-color="dark">Proceed to buy</button>
                   </div>
                 </div>
               </div>

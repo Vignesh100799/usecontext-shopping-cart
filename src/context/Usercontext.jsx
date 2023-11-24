@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { createContext, useState } from "react";
+import Spinner from "./Spinner";
 
 const Usercontext = createContext();
 
@@ -8,48 +9,70 @@ export const UserProvider = ({ children }) => {
   const [product, setProduct] = useState([]);
   const [cartitem, setCartitem] = useState([]);
   const [total, setTotal] = useState(0);
-  const [qty, setQty] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const handleAdditem = (selectedProduct) => {
-    setCartitem([...cartitem, selectedProduct]);
-    setTotal(total + selectedProduct.price);
+  const handletotal = () => {
+    let price = 0;
+    cartitem.map((item) => {
+      price += Number(item.price * item.quantity);
+    });
+    setTotal(price);
+  }
+  useEffect(()=>{
+    handletotal()
+  })
+  const handleChange = (item, quantity) => {
+    const updatedCart = cartitem.map((existingItem) => {
+      if (existingItem.id === item.id) {
+        const updatedqty = existingItem.quantity + quantity;
+        return { ...existingItem, quantity: updatedqty > 0 ? updatedqty : 1 };
+      } else {
+        return existingItem;
+      }
+    });
+    setCartitem(updatedCart);
   };
+
+  const handleAdditem = (product) => {
+    setCartitem([...cartitem, product]);
+  };
+
   const handleRemoveitem = (itemToRemove) => {
     setCartitem(cartitem.filter((item) => item.id !== itemToRemove.id));
-    setTotal(total - itemToRemove.price);
   };
-  const handleincrease = (increase)=>{
-    setQty(qty + 1)
-    setTotal ( total + (qty * increase.price))
-  }
-  const handleDecrease = (decrease)=>{
-    setQty(qty - 1)
-    setTotal(total + (qty/ decrease.price))
-  }
 
+  
   useEffect(() => {
-    let getData = async () => {
+    let fetchData = async () => {
       try {
+        setLoading(true);
         const productData = await axios.get(
           `https://fakestoreapi.com/products`
         );
-        setProduct([...productData.data]);
-        setCartitem(cartitem);
+        const updateProductdata = productData.data.map((item) => ({
+          ...item,
+          quantity: 1,
+        }));
+        setProduct(updateProductdata);
+        
       } catch (error) {
         console.log(error);
+        
+      }finally{
+        setLoading(false)
       }
     };
-    getData();
+    fetchData();
   }, []);
   const contextValue = {
     product,
     handleAdditem,
     handleRemoveitem,
     cartitem,
-    handleincrease,
-    handleDecrease,
-    qty,
     total,
+    handletotal,
+    handleChange,
+    loading,
   };
   //  console.log(product)
   return (

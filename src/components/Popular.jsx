@@ -1,14 +1,18 @@
 import React, { useContext } from 'react'
 import Usercontext from '../context/Usercontext'
 import { StarFill } from "react-bootstrap-icons";
+import Spinner from '../context/Spinner';
+import Header from './Header';
 
 
 const Popular = () => {
-  const {product,handleAdditem,handleRemoveitem,cartitem} = useContext(Usercontext);
+  const {product,loading,handleAdditem,handleRemoveitem,cartitem} = useContext(Usercontext);
 
-  return (
-    <div>
-         <section className="py-5">
+    return (
+  <div>
+    <Header/>
+      {loading ? (<Spinner/>) :
+        ( <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 {
@@ -62,7 +66,7 @@ const Popular = () => {
 }
     </div>
     </div>
-    </section>
+    </section> )}
     </div>
   )
 }
