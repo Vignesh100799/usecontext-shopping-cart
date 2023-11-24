@@ -13,13 +13,13 @@ export const UserProvider = ({ children }) => {
   const handletotal = () => {
     let price = 0;
     cartitem.map((item) => {
-      price += Number(item.price * item.quantity);
+     return price += Number(item.price * item.quantity);
     });
     setTotal(price);
-  }
-  useEffect(()=>{
-    handletotal()
-  })
+  };
+  useEffect(() => {
+    handletotal();
+  });
   const handleChange = (item, quantity) => {
     const updatedCart = cartitem.map((existingItem) => {
       if (existingItem.id === item.id) {
@@ -40,7 +40,6 @@ export const UserProvider = ({ children }) => {
     setCartitem(cartitem.filter((item) => item.id !== itemToRemove.id));
   };
 
-  
   useEffect(() => {
     let fetchData = async () => {
       try {
@@ -53,12 +52,10 @@ export const UserProvider = ({ children }) => {
           quantity: 1,
         }));
         setProduct(updateProductdata);
-        
       } catch (error) {
         console.log(error);
-        
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();

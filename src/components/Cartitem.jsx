@@ -57,7 +57,7 @@ const Cartitem = ({ item }) => {
             -
           </button>
           <span>&nbsp;&nbsp;{item.quantity}&nbsp;&nbsp;</span>
-          {console.log(item.quantity)}
+         
           <button
             className="btn btn-success px-2"
             onClick={() => handleChange(item, +1)}
